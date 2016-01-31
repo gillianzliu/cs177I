@@ -12880,9 +12880,9 @@ MediaPlayer.rules.ThroughputRule = function() {
         if (len > 0) {
             var startValue = len - sampleAmount, totalSampledValue = 0;
             for (var i = startValue; i < len; i++) {
-                totalSampledValue += arr[i];
+                totalSampledValue += 1 / arr[i];
             }
-            averageThroughput = totalSampledValue / sampleAmount;
+            averageThroughput = sampleAmount / totalSampledValue;
         }
         if (arr.length > sampleAmount) {
             arr.shift();

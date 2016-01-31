@@ -45,6 +45,8 @@ MediaPlayer.rules.ThroughputRule = function () {
             }
         },
 
+        //---------CHANGING---------------------//
+        //CHANGE TO HARMONIC MEAN INSTEAD
         getAverageThroughput = function (type,  isDynamic) {
             var averageThroughput = 0,
                 sampleAmount = isDynamic ? AVERAGE_THROUGHPUT_SAMPLE_AMOUNT_LIVE: AVERAGE_THROUGHPUT_SAMPLE_AMOUNT_VOD,
@@ -58,9 +60,10 @@ MediaPlayer.rules.ThroughputRule = function () {
                     totalSampledValue = 0;
 
                 for (var i = startValue; i < len; i++) {
-                    totalSampledValue += arr[i];
+                    //totalSampledValue += arr[i];
+                    totalSampledValue += 1 / arr[i];
                 }
-                averageThroughput = totalSampledValue / sampleAmount;
+                averageThroughput = sampleAmount / totalSampledValue;
             }
 
             if (arr.length > sampleAmount) {
