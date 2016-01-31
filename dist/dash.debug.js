@@ -12717,9 +12717,7 @@ MediaPlayer.rules.ABRRulesCollection = function() {
             }
         },
         setup: function() {
-            qualitySwitchRules.push(this.insufficientBufferRule);
             qualitySwitchRules.push(this.throughputRule);
-            qualitySwitchRules.push(this.bufferOccupancyRule);
             adandonFragmentRules.push(this.abandonRequestRule);
         }
     };
