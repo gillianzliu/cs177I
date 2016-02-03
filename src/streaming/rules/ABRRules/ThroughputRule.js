@@ -63,6 +63,7 @@ MediaPlayer.rules.ThroughputRule = function () {
                     //totalSampledValue += arr[i];
                     totalSampledValue += 1 / arr[i];
                 }
+                //averageThroughput = totalSampledValue / sampleAmount;
                 averageThroughput = sampleAmount / totalSampledValue;
             }
 
@@ -101,6 +102,9 @@ MediaPlayer.rules.ThroughputRule = function () {
                 bufferLevelVO = (metrics.BufferLevel.length > 0) ? metrics.BufferLevel[metrics.BufferLevel.length - 1] : null,
                 switchRequest =  new MediaPlayer.rules.SwitchRequest(MediaPlayer.rules.SwitchRequest.prototype.NO_CHANGE, MediaPlayer.rules.SwitchRequest.prototype.WEAK);
 
+            //CHANGE THE SWITCH REQUEST SYSTEM
+            //ASK ABOUT THE 2^n + 1
+
             if (now - lastSwitchTime < waitToSwitchTime ||
                 !metrics || lastRequest === null ||
                 lastRequest.type !== MediaPlayer.vo.metrics.HTTPRequest.MEDIA_SEGMENT_TYPE ||
@@ -133,6 +137,8 @@ MediaPlayer.rules.ThroughputRule = function () {
                             switchRequest.priority === MediaPlayer.rules.SwitchRequest.prototype.STRONG ? "Strong" : "Weak", "Average throughput", Math.round(averageThroughput), "kbps");
                 }
             }
+
+            //CHANGE UP TO HERE
 
             callback(switchRequest);
         },
